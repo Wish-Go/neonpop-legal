@@ -60,8 +60,7 @@
   .nav-links a:hover { color: var(--ink); }
 
   /* ───────── Hero ───────── */
-  .hero { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 52px; align-items: center;
-    padding: 84px 0 92px; }
+  .hero { text-align: center; padding: 110px 0 96px; }
   .eyebrow {
     display: inline-flex; align-items: center; gap: 8px;
     border: 1px solid var(--hairline-strong); border-radius: 999px;
@@ -76,7 +75,7 @@
     background: linear-gradient(92deg, var(--pink) 0%, var(--gold) 55%, var(--blue) 110%);
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }
-  .lede { color: var(--dim); font-size: 17px; max-width: 45ch; margin-bottom: 32px; }
+  .lede { color: var(--dim); font-size: 17.5px; max-width: 52ch; margin: 0 auto 34px; }
   .btn-primary {
     display: inline-flex; align-items: center; gap: 10px;
     font-family: var(--font-display); font-weight: 600; font-size: 15px; letter-spacing: 0.04em;
@@ -89,93 +88,6 @@
   .btn-primary:hover { transform: translateY(-1px);
     box-shadow: 0 1px 0 rgba(255,255,255,0.5) inset, 0 12px 30px rgba(240, 200, 69, 0.3); }
   .note { color: var(--faint); font-size: 13.5px; margin-top: 14px; }
-
-  /* ───────── 手机:照游戏实际界面 1:1 复刻 ───────── */
-  .device-slot { display: flex; justify-content: center; perspective: 1400px; }
-  .device {
-    width: 292px; height: 604px; border-radius: 42px; position: relative;
-    background: linear-gradient(160deg, #201736 0%, #120C24 100%);
-    border: 1px solid var(--hairline-strong);
-    box-shadow: 0 40px 80px rgba(0,0,0,0.55), 0 0 60px rgba(242, 147, 187, 0.07);
-    transform: rotateY(-7deg) rotateX(3deg);
-    animation: float 7s ease-in-out infinite;
-  }
-  @keyframes float {
-    0%, 100% { transform: rotateY(-7deg) rotateX(3deg) translateY(0); }
-    50%      { transform: rotateY(-7deg) rotateX(3deg) translateY(-12px); }
-  }
-  .device::before { content: ""; position: absolute; top: 15px; left: 50%; transform: translateX(-50%);
-    width: 62px; height: 5px; border-radius: 3px; background: rgba(255,255,255,0.1); }
-  .screen {
-    position: absolute; inset: 32px 13px 13px; border-radius: 28px; overflow: hidden;
-    background: radial-gradient(130% 80% at 50% 100%, #3A1B48 0%, #1B1136 45%, #120B24 100%);
-  }
-
-  /* HUD:左上 SCORE + LEVEL 药丸,右上 NEXT 面板 + 暂停 —— 与游戏同构 */
-  .hud-score { position: absolute; left: 14px; top: 12px; }
-  .hud-score .lbl { font-size: 8px; letter-spacing: 0.16em; color: #E3BEBA; font-weight: 600; }
-  .hud-score .num { font-family: var(--font-display); font-weight: 700; font-size: 27px; line-height: 1;
-    margin-top: 1px;
-    background: linear-gradient(180deg, #FFFFFF 55%, #BAAEFF 100%);
-    -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .hud-level { position: absolute; left: 14px; top: 52px;
-    background: linear-gradient(180deg, #F7DA7A, var(--gold)); color: #150E2D;
-    font-family: var(--font-display); font-weight: 700; font-size: 8px; letter-spacing: 0.06em;
-    padding: 3px 10px; border-radius: 999px; }
-  .hud-next { position: absolute; right: 40px; top: 10px; width: 27px;
-    background: rgba(255,255,255,0.05); border: 1px solid var(--hairline);
-    border-radius: 999px; padding: 5px 0 6px; text-align: center; }
-  .hud-next .lbl { font-size: 6.5px; letter-spacing: 0.14em; color: #E3BEBA; font-weight: 600;
-    display: block; margin-bottom: 4px; }
-  .hud-next .tile { width: 17px; height: 17px; margin: 0 auto 3px; }
-  .hud-pause { position: absolute; right: 11px; top: 12px; width: 21px; height: 21px;
-    border-radius: 50%; border: 1.5px solid rgba(123, 231, 255, 0.55);
-    display: flex; align-items: center; justify-content: center; gap: 2px; }
-  .hud-pause i { width: 2px; height: 7px; border-radius: 1px; background: rgba(123, 231, 255, 0.85); }
-
-  /* 棋盘:7 列(与 GameplayConst.DEFAULT_COLS 一致) */
-  .board { position: absolute; left: 50%; transform: translateX(-50%); bottom: 26px;
-    display: grid; grid-template-columns: repeat(7, 24px); grid-auto-rows: 24px; gap: 2px; }
-  .cell { border-radius: 3px; background: rgba(255,255,255,0.028);
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02); }
-
-  /* 方块:斜面积木(亮上左 / 暗下右 边框 + 平光面),与游戏贴图同构 */
-  .tile { border-radius: 3px; position: relative;
-    box-shadow: inset 2.5px 2.5px 3px rgba(255,255,255,0.5),
-                inset -2.5px -2.5px 3px rgba(0,0,0,0.34),
-                inset 0 0 0 1px rgba(255,255,255,0.1); }
-  .t-red   { background: linear-gradient(160deg, #E2585A, #B32E30); }
-  .t-green { background: linear-gradient(160deg, #9BE092, #6BB962); }
-  .t-blue  { background: linear-gradient(160deg, #82CEF0, #4098CC); }
-  .t-gold  { background: linear-gradient(160deg, #F6D874, #DCB236); }
-  .t-pink  { background: linear-gradient(160deg, #F7B7D0, #E07FA6); }
-
-  /* 下落中的竖三连(唯一形状 Vertical3) */
-    /* margin-left 对准第 4 列(空槽列):格 24 + 缝 2,列 3 相对棋盘中心 = -15 */
-  .falling { position: absolute; left: 50%; margin-left: -15px; bottom: 26px;
-    display: grid; grid-auto-rows: 24px; gap: 2px; width: 24px;
-    animation: fall 6.5s cubic-bezier(0.42, 0, 0.85, 1) infinite; }
-  @keyframes fall {
-    0%   { transform: translateY(-330px); opacity: 0; }
-    7%   { opacity: 1; }
-    52%  { transform: translateY(-52px); opacity: 1; }   /* 正好填满第 4 列那三格空槽 */
-    60%  { transform: translateY(-52px); opacity: 0; }   /* 三连成立 → 消失 */
-    100% { transform: translateY(-52px); opacity: 0; }
-  }
-  /* 消除闪光:落定那一行 */
-  /* 只闪成三连的那三格(第 7 行 c2..c4),与游戏"只清匹配到的格"一致 */
-  .clear-row { position: absolute; left: 50%; margin-left: -39px; bottom: 78px;
-    width: 76px; height: 24px; border-radius: 4px;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.9) 45%, rgba(240,200,69,0.9) 55%, transparent);
-    filter: blur(2px); opacity: 0; animation: flash 6.5s ease-out infinite; }
-  @keyframes flash { 0%, 51% { opacity: 0; } 57% { opacity: 1; } 70%, 100% { opacity: 0; } }
-
-  /* 右侧进度光柱(ProgressColumnView) */
-  .prog { position: absolute; right: 27px; bottom: 118px; width: 7px; height: 180px;
-    border-radius: 4px; background: rgba(58, 43, 94, 0.9); overflow: hidden; }
-  .prog i { position: absolute; left: 0; right: 0; bottom: 0; height: 42%;
-    border-radius: 4px; background: linear-gradient(0deg, #4FE3D6, #6C8CFF 55%, #E86FD0);
-    box-shadow: 0 0 10px rgba(108, 140, 255, 0.7); }
 
   /* ───────── 特性 ───────── */
   .features { padding: 4px 0 96px; }
@@ -199,14 +111,8 @@
   .foot-links a:hover { color: var(--ink); }
 
   @media (max-width: 880px) {
-    .hero { grid-template-columns: 1fr; padding: 52px 0 60px; text-align: center; }
-    .lede { margin-inline: auto; }
-    .device-slot { order: -1; }
+    .hero { padding: 72px 0 64px; }
     .features-grid { grid-template-columns: 1fr; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .device, .falling, .clear-row { animation: none; }
-    .falling { transform: translateY(-130px); }
   }
 </style>
 </head>
@@ -235,7 +141,6 @@
 
 <main>
   <section class="wrap hero">
-    <div>
       <span class="eyebrow">Falling-block match puzzle</span>
       <h1>Stack the glow.<br><span class="grad">Chain the pop.</span></h1>
       <p class="lede">Trios of neon blocks fall onto a seven-wide board. Line up three or more
@@ -250,46 +155,7 @@
         Google Play
       </a>
       <p class="note">Coming soon — the store link lands here at launch.</p>
-    </div>
-
-    <div class="device-slot">
-      <div class="device" role="img" aria-label="NEON POP gameplay screen">
-        <div class="screen">
-          <div class="hud-score"><span class="lbl">SCORE</span><div class="num">7,860</div></div>
-          <div class="hud-level">LEVEL 4</div>
-          <div class="hud-next">
-            <span class="lbl">NEXT</span>
-            <div class="tile t-pink"></div>
-            <div class="tile t-gold"></div>
-            <div class="tile t-blue"></div>
-          </div>
-          <div class="hud-pause"><i></i><i></i></div>
-
-          <div class="prog"><i></i></div>
-
-          <div class="falling">
-            <div class="tile t-green"></div>
-            <div class="tile t-red"></div>
-            <div class="tile t-red"></div>
-          </div>
-
-          <div class="board" aria-hidden="true">
-            <!-- 上四行空 -->
-            <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
-            <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
-            <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
-            <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
-            <!-- 堆起来的五行 -->
-            <div class="cell"></div><div class="cell"></div><div class="tile t-gold"></div><div class="cell"></div><div class="cell"></div><div class="tile t-pink"></div><div class="cell"></div>
-            <div class="cell"></div><div class="tile t-blue"></div><div class="tile t-green"></div><div class="cell"></div><div class="tile t-gold"></div><div class="tile t-red"></div><div class="cell"></div>
-            <div class="tile t-pink"></div><div class="tile t-gold"></div><div class="tile t-red"></div><div class="cell"></div><div class="tile t-red"></div><div class="tile t-green"></div><div class="tile t-gold"></div>
-            <div class="tile t-green"></div><div class="tile t-red"></div><div class="tile t-blue"></div><div class="tile t-pink"></div><div class="tile t-gold"></div><div class="tile t-blue"></div><div class="tile t-red"></div>
-            <div class="tile t-gold"></div><div class="tile t-pink"></div><div class="tile t-green"></div><div class="tile t-red"></div><div class="tile t-pink"></div><div class="tile t-gold"></div><div class="tile t-green"></div>
-          </div>
-          <div class="clear-row"></div>
-        </div>
-      </div>
-    </div>
+      <!-- 真机截图就位后放这里:<img src="screenshot.png" alt="NEON POP gameplay" width="292"> -->
   </section>
 
   <section class="wrap features">
