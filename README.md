@@ -3,7 +3,7 @@
 Official site for the mobile game **NEON POP** (`com.neonpop.game`) — landing page plus
 the legal pages linked from inside the game and from the Google Play listing.
 
-**Live:** https://wish-go.github.io/Neonpop/
+**Live:** https://wish-go.github.io/neonpop-legal/
 
 | Page | Where it is used |
 | --- | --- |
@@ -20,23 +20,29 @@ The game repo keeps a mirror under `Docs/Legal/` so the pages travel with the so
 but that is a copy: after changing anything here, copy the three files over and commit
 them there too.
 
-## ⚠️ If you rename this repository
+## ⚠️ Do not rename this repository
 
-GitHub Pages does **not** redirect the old URL — it starts returning 404 immediately, and
-the in-game links break silently: the player taps Privacy Policy in Settings and lands on
-a 404. That is exactly what Google checks during review.
+The URL above is already registered in Play Console under **App content → Privacy policy**,
+and that field is effectively frozen once the listing is filed. The repo name is therefore
+part of a published contract, not a cosmetic choice.
 
-A rename means updating all of these:
+GitHub Pages does **not** redirect after a rename — the old URL returns 404 immediately and
+the in-game links break silently: the player taps Privacy Policy in Settings and lands on a
+404, which is exactly what Google checks during review.
 
-1. `Assets/Scripts/GamePlay/Common/PloxLinks.cs` → `LEGAL_BASE`, in the game repo
-2. Play Console → App content → Privacy policy
-3. Play Console → Store listing → Website
+This already happened once (`neonpop-legal` → `Neonpop`, Aug 2026) and had to be undone by
+renaming back, because the Play Console entry could not be edited.
+
+If a rename ever becomes unavoidable, **confirm the Play Console field can be changed first**,
+then update, in this order:
+
+1. Play Console → App content → Privacy policy
+2. Play Console → Store listing → Website
+3. `Assets/Scripts/GamePlay/Common/PloxLinks.cs` → `LEGAL_BASE`, in the game repo
 4. The **Live** link at the top of this file
 
-Then open `<new-url>/privacy.html` and confirm it returns 200 — not just the landing page.
-The landing page and the legal pages are separate checks, and this repo has already been
-renamed once (`neonpop-legal` → `Neonpop`) with the in-game links left pointing at the
-dead address.
+Finally open `<new-url>/privacy.html` and confirm 200 — not just the landing page. The
+landing page and the legal pages are separate checks.
 
 ## Contact
 
