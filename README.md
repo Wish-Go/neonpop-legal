@@ -1,7 +1,7 @@
 # NEON POP
 
 Official site for the mobile game **NEON POP** (`com.neonpop.game`) — landing page plus
-the legal pages linked from inside the game and from the Google Play listing.
+the legal pages linked from inside the game .
 
 **Live:** https://wish-go.github.io/neonpop-legal/
 
