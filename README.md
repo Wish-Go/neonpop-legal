@@ -7,9 +7,9 @@ the legal pages linked from inside the game and from the Google Play listing.
 
 | Page | Where it is used |
 | --- | --- |
-| [`index.html`](index.html) | Landing page. Goes in the Play listing's **Website** field. |
-| [`privacy.html`](privacy.html) | Privacy Policy. Play Console → App content → **Privacy policy**, and the in-game Settings page. |
-| [`terms.html`](terms.html) | Terms of Service. Opened from the in-game Settings page. |
+| [`index.html`](index.html) | Landing page.  |
+| [`privacy.html`](privacy.html) | Privacy Policy. |
+| [`terms.html`](terms.html) | Terms of Service.  |
 
 ## Editing
 
