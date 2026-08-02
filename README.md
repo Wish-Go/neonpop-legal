@@ -1,4 +1,4 @@
-# NEON POP — Legal
+# NEON POP
 
 Public hosting for the legal pages of the mobile game **NEON POP** (`com.neonpop.game`).
 
