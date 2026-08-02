@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NEON POP — Falling-Block Match Puzzle</title>
-<meta name="description" content="NEON POP is a neon-lit falling-block match puzzle. Stack, match 3+, chain cascades. Coming to Google Play.">
+<meta name="description" content="NEON POP is a neon-lit falling-block match puzzle. Drop trios onto a 7-wide board, match three or more, chain the cascade.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='3' width='12' height='12' rx='3' fill='%23F0C845'/%3E%3Crect x='17' y='3' width='12' height='12' rx='3' fill='%23F293BB'/%3E%3Crect x='3' y='17' width='12' height='12' rx='3' fill='%235CB8E7'/%3E%3Crect x='17' y='17' width='12' height='12' rx='3' fill='%2382D179'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,41 +23,29 @@
     --pink: #F293BB;
     --blue: #5CB8E7;
     --green: #82D179;
-    --red: #E05A5C;
-    --radius-lg: 20px;
-    --radius-md: 14px;
+    --red: #CE3537;
     --font-display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
     --font-body: "Inter", "Segoe UI", system-ui, sans-serif;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
   body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: var(--font-body);
-    font-size: 16px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
+    background: var(--bg); color: var(--ink);
+    font-family: var(--font-body); font-size: 16px; line-height: 1.6;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden;
   }
-
-  /* ———— 环境光:两团低透明度光晕 + 极淡点阵 ———— */
   .ambient {
     position: fixed; inset: 0; z-index: -1; pointer-events: none;
     background-image: radial-gradient(rgba(255,255,255,0.045) 1px, transparent 1px);
     background-size: 28px 28px;
-    mask-image: radial-gradient(75% 60% at 50% 32%, #000 0%, transparent 100%);
-    -webkit-mask-image: radial-gradient(75% 60% at 50% 32%, #000 0%, transparent 100%);
+    mask-image: radial-gradient(75% 60% at 50% 30%, #000 0%, transparent 100%);
+    -webkit-mask-image: radial-gradient(75% 60% at 50% 30%, #000 0%, transparent 100%);
   }
   .orb { position: fixed; border-radius: 50%; filter: blur(110px); z-index: -2; pointer-events: none; }
-  .orb-a { width: 520px; height: 520px; top: -180px; right: -120px;
-    background: rgba(242, 147, 187, 0.14); }
-  .orb-b { width: 460px; height: 460px; bottom: -200px; left: -140px;
-    background: rgba(92, 184, 231, 0.11); }
+  .orb-a { width: 520px; height: 520px; top: -190px; right: -130px; background: rgba(242, 147, 187, 0.13); }
+  .orb-b { width: 460px; height: 460px; bottom: -210px; left: -150px; background: rgba(92, 184, 231, 0.10); }
 
   .wrap { max-width: 1060px; margin: 0 auto; padding: 0 28px; }
 
-  /* ———— 顶栏 ———— */
   header {
     position: sticky; top: 0; z-index: 10;
     backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
@@ -66,15 +54,14 @@
   }
   .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
   .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
-  .brand svg { display: block; }
   .brand-name { font-family: var(--font-display); font-weight: 700; font-size: 17px; letter-spacing: 0.16em; }
   .nav-links { display: flex; align-items: center; gap: 26px; }
   .nav-links a { color: var(--dim); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.18s; }
   .nav-links a:hover { color: var(--ink); }
 
-  /* ———— Hero ———— */
-  .hero { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 48px; align-items: center;
-    padding: 88px 0 96px; }
+  /* ───────── Hero ───────── */
+  .hero { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 52px; align-items: center;
+    padding: 84px 0 92px; }
   .eyebrow {
     display: inline-flex; align-items: center; gap: 8px;
     border: 1px solid var(--hairline-strong); border-radius: 999px;
@@ -83,18 +70,13 @@
   }
   .eyebrow::before { content: ""; width: 6px; height: 6px; border-radius: 50%;
     background: var(--gold); box-shadow: 0 0 8px var(--gold); }
-  h1 {
-    font-family: var(--font-display); font-weight: 700;
-    font-size: clamp(40px, 5.6vw, 62px); line-height: 1.06; letter-spacing: -0.02em;
-    margin-bottom: 22px;
-  }
+  h1 { font-family: var(--font-display); font-weight: 700;
+    font-size: clamp(40px, 5.6vw, 62px); line-height: 1.06; letter-spacing: -0.02em; margin-bottom: 22px; }
   h1 .grad {
     background: linear-gradient(92deg, var(--pink) 0%, var(--gold) 55%, var(--blue) 110%);
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }
-  .lede { color: var(--dim); font-size: 17px; max-width: 44ch; margin-bottom: 34px; }
-
-  .cta-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 30px; }
+  .lede { color: var(--dim); font-size: 17px; max-width: 45ch; margin-bottom: 32px; }
   .btn-primary {
     display: inline-flex; align-items: center; gap: 10px;
     font-family: var(--font-display); font-weight: 600; font-size: 15px; letter-spacing: 0.04em;
@@ -106,104 +88,109 @@
   }
   .btn-primary:hover { transform: translateY(-1px);
     box-shadow: 0 1px 0 rgba(255,255,255,0.5) inset, 0 12px 30px rgba(240, 200, 69, 0.3); }
-  .btn-ghost {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-size: 14px; font-weight: 500; color: var(--dim); text-decoration: none;
-    border: 1px solid var(--hairline-strong); border-radius: 12px; padding: 12px 20px;
-    transition: color 0.18s, border-color 0.18s, background 0.18s;
-  }
-  .btn-ghost:hover { color: var(--ink); border-color: rgba(255,255,255,0.24); background: var(--surface); }
+  .note { color: var(--faint); font-size: 13.5px; margin-top: 14px; }
 
-  .meta-row { display: flex; gap: 22px; flex-wrap: wrap; }
-  .meta { display: flex; align-items: center; gap: 8px; color: var(--faint); font-size: 13.5px; }
-  .meta svg { color: var(--dim); }
-
-  /* ———— 手机模型 ———— */
+  /* ───────── 手机:照游戏实际界面 1:1 复刻 ───────── */
   .device-slot { display: flex; justify-content: center; perspective: 1400px; }
   .device {
-    width: 288px; height: 596px; border-radius: 42px; position: relative;
+    width: 292px; height: 604px; border-radius: 42px; position: relative;
     background: linear-gradient(160deg, #201736 0%, #120C24 100%);
     border: 1px solid var(--hairline-strong);
-    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.55), 0 0 60px rgba(242, 147, 187, 0.07);
+    box-shadow: 0 40px 80px rgba(0,0,0,0.55), 0 0 60px rgba(242, 147, 187, 0.07);
     transform: rotateY(-7deg) rotateX(3deg);
     animation: float 7s ease-in-out infinite;
   }
-  @keyframes float { 0%, 100% { transform: rotateY(-7deg) rotateX(3deg) translateY(0); }
-    50% { transform: rotateY(-7deg) rotateX(3deg) translateY(-12px); } }
-  .device::before { /* 听筒 */
-    content: ""; position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
-    width: 64px; height: 5px; border-radius: 3px; background: rgba(255,255,255,0.1);
+  @keyframes float {
+    0%, 100% { transform: rotateY(-7deg) rotateX(3deg) translateY(0); }
+    50%      { transform: rotateY(-7deg) rotateX(3deg) translateY(-12px); }
   }
+  .device::before { content: ""; position: absolute; top: 15px; left: 50%; transform: translateX(-50%);
+    width: 62px; height: 5px; border-radius: 3px; background: rgba(255,255,255,0.1); }
   .screen {
-    position: absolute; inset: 34px 14px 14px;
-    border-radius: 28px; overflow: hidden;
-    background: radial-gradient(120% 90% at 50% 0%, #241B42 0%, #140C26 74%);
+    position: absolute; inset: 32px 13px 13px; border-radius: 28px; overflow: hidden;
+    background: radial-gradient(130% 80% at 50% 100%, #3A1B48 0%, #1B1136 45%, #120B24 100%);
   }
-  .hud { display: flex; justify-content: space-between; align-items: center; padding: 16px 16px 0; }
-  .hud-chip {
-    font-family: var(--font-display); font-weight: 600; font-size: 11px; letter-spacing: 0.1em;
-    color: var(--ink); background: rgba(255,255,255,0.07);
-    border: 1px solid var(--hairline); border-radius: 999px; padding: 5px 12px;
-  }
-  .hud-chip b { color: var(--gold); font-weight: 700; }
 
-  .board { position: absolute; left: 50%; transform: translateX(-50%); bottom: 22px;
-    display: grid; grid-template-columns: repeat(6, 34px); grid-auto-rows: 34px; gap: 4px; }
-  .cell { border-radius: 6px; background: rgba(255,255,255,0.035); }
-  .tile { border-radius: 6px; position: relative;
-    box-shadow: inset 0 3px 5px rgba(255,255,255,0.42), inset 0 -4px 6px rgba(0,0,0,0.34),
-                inset 3px 0 4px rgba(255,255,255,0.14), inset -3px 0 4px rgba(0,0,0,0.2); }
-  .t-red   { background: linear-gradient(180deg, #E86A6B, #C0393B); }
-  .t-green { background: linear-gradient(180deg, #A8E49F, #6FBF66); }
-  .t-blue  { background: linear-gradient(180deg, #8ED2F2, #4BA6D8); }
-  .t-gold  { background: linear-gradient(180deg, #F7DC7E, #DDB63C); }
-  .t-pink  { background: linear-gradient(180deg, #F8BDD5, #E285AC); }
+  /* HUD:左上 SCORE + LEVEL 药丸,右上 NEXT 面板 + 暂停 —— 与游戏同构 */
+  .hud-score { position: absolute; left: 14px; top: 12px; }
+  .hud-score .lbl { font-size: 8px; letter-spacing: 0.16em; color: #E3BEBA; font-weight: 600; }
+  .hud-score .num { font-family: var(--font-display); font-weight: 700; font-size: 27px; line-height: 1;
+    margin-top: 1px;
+    background: linear-gradient(180deg, #FFFFFF 55%, #BAAEFF 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hud-level { position: absolute; left: 14px; top: 52px;
+    background: linear-gradient(180deg, #F7DA7A, var(--gold)); color: #150E2D;
+    font-family: var(--font-display); font-weight: 700; font-size: 8px; letter-spacing: 0.06em;
+    padding: 3px 10px; border-radius: 999px; }
+  .hud-next { position: absolute; right: 40px; top: 10px; width: 27px;
+    background: rgba(255,255,255,0.05); border: 1px solid var(--hairline);
+    border-radius: 999px; padding: 5px 0 6px; text-align: center; }
+  .hud-next .lbl { font-size: 6.5px; letter-spacing: 0.14em; color: #E3BEBA; font-weight: 600;
+    display: block; margin-bottom: 4px; }
+  .hud-next .tile { width: 17px; height: 17px; margin: 0 auto 3px; }
+  .hud-pause { position: absolute; right: 11px; top: 12px; width: 21px; height: 21px;
+    border-radius: 50%; border: 1.5px solid rgba(123, 231, 255, 0.55);
+    display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .hud-pause i { width: 2px; height: 7px; border-radius: 1px; background: rgba(123, 231, 255, 0.85); }
 
-  /* 下落中的竖排三连:与底部消除闪光同一条 6s 时间线 */
-  .falling { position: absolute; left: 50%; margin-left: -19px; top: 44px;
-    display: grid; grid-auto-rows: 34px; gap: 4px; width: 34px;
-    animation: fall 6s cubic-bezier(0.4, 0, 0.8, 1) infinite; }
-  .falling .tile { width: 34px; }
+  /* 棋盘:7 列(与 GameplayConst.DEFAULT_COLS 一致) */
+  .board { position: absolute; left: 50%; transform: translateX(-50%); bottom: 26px;
+    display: grid; grid-template-columns: repeat(7, 24px); grid-auto-rows: 24px; gap: 2px; }
+  .cell { border-radius: 3px; background: rgba(255,255,255,0.028);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02); }
+
+  /* 方块:斜面积木(亮上左 / 暗下右 边框 + 平光面),与游戏贴图同构 */
+  .tile { border-radius: 3px; position: relative;
+    box-shadow: inset 2.5px 2.5px 3px rgba(255,255,255,0.5),
+                inset -2.5px -2.5px 3px rgba(0,0,0,0.34),
+                inset 0 0 0 1px rgba(255,255,255,0.1); }
+  .t-red   { background: linear-gradient(160deg, #E2585A, #B32E30); }
+  .t-green { background: linear-gradient(160deg, #9BE092, #6BB962); }
+  .t-blue  { background: linear-gradient(160deg, #82CEF0, #4098CC); }
+  .t-gold  { background: linear-gradient(160deg, #F6D874, #DCB236); }
+  .t-pink  { background: linear-gradient(160deg, #F7B7D0, #E07FA6); }
+
+  /* 下落中的竖三连(唯一形状 Vertical3) */
+    /* margin-left 对准第 4 列(空槽列):格 24 + 缝 2,列 3 相对棋盘中心 = -15 */
+  .falling { position: absolute; left: 50%; margin-left: -15px; bottom: 26px;
+    display: grid; grid-auto-rows: 24px; gap: 2px; width: 24px;
+    animation: fall 6.5s cubic-bezier(0.42, 0, 0.85, 1) infinite; }
   @keyframes fall {
-    0%   { transform: translateY(-130px); opacity: 0; }
-    8%   { opacity: 1; }
-    58%  { transform: translateY(230px); opacity: 1; }
-    64%  { transform: translateY(230px); opacity: 0; }
-    100% { transform: translateY(230px); opacity: 0; }
+    0%   { transform: translateY(-330px); opacity: 0; }
+    7%   { opacity: 1; }
+    52%  { transform: translateY(-52px); opacity: 1; }   /* 正好填满第 4 列那三格空槽 */
+    60%  { transform: translateY(-52px); opacity: 0; }   /* 三连成立 → 消失 */
+    100% { transform: translateY(-52px); opacity: 0; }
   }
-  .clear-row { position: absolute; left: 0; right: 0; bottom: 98px; height: 34px;
-    background: linear-gradient(90deg, transparent, rgba(240, 200, 69, 0.75), transparent);
-    filter: blur(2px); opacity: 0; animation: flash 6s ease-out infinite; }
-  @keyframes flash {
-    0%, 57% { opacity: 0; }
-    63%     { opacity: 1; }
-    74%, 100% { opacity: 0; }
-  }
+  /* 消除闪光:落定那一行 */
+  /* 只闪成三连的那三格(第 7 行 c2..c4),与游戏"只清匹配到的格"一致 */
+  .clear-row { position: absolute; left: 50%; margin-left: -39px; bottom: 78px;
+    width: 76px; height: 24px; border-radius: 4px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.9) 45%, rgba(240,200,69,0.9) 55%, transparent);
+    filter: blur(2px); opacity: 0; animation: flash 6.5s ease-out infinite; }
+  @keyframes flash { 0%, 51% { opacity: 0; } 57% { opacity: 1; } 70%, 100% { opacity: 0; } }
 
-  /* ———— 特性区 ———— */
-  .features { padding: 8px 0 100px; }
-  .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--hairline);
-    border-radius: var(--radius-lg);
-    padding: 26px 22px;
-    transition: background 0.22s, border-color 0.22s, transform 0.22s;
-  }
-  .card:hover { background: var(--surface-hover); border-color: var(--hairline-strong);
-    transform: translateY(-3px); }
-  .icon-tile {
-    width: 42px; height: 42px; border-radius: 12px;
+  /* 右侧进度光柱(ProgressColumnView) */
+  .prog { position: absolute; right: 27px; bottom: 118px; width: 7px; height: 180px;
+    border-radius: 4px; background: rgba(58, 43, 94, 0.9); overflow: hidden; }
+  .prog i { position: absolute; left: 0; right: 0; bottom: 0; height: 42%;
+    border-radius: 4px; background: linear-gradient(0deg, #4FE3D6, #6C8CFF 55%, #E86FD0);
+    box-shadow: 0 0 10px rgba(108, 140, 255, 0.7); }
+
+  /* ───────── 特性 ───────── */
+  .features { padding: 4px 0 96px; }
+  .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .card { background: var(--surface); border: 1px solid var(--hairline); border-radius: 20px;
+    padding: 26px 22px; transition: background 0.22s, border-color 0.22s, transform 0.22s; }
+  .card:hover { background: var(--surface-hover); border-color: var(--hairline-strong); transform: translateY(-3px); }
+  .icon-tile { width: 42px; height: 42px; border-radius: 12px;
     display: flex; align-items: center; justify-content: center;
     border: 1px solid var(--hairline-strong);
     background: linear-gradient(160deg, rgba(255,255,255,0.07), rgba(255,255,255,0.015));
-    margin-bottom: 18px; color: var(--ink);
-  }
-  .card h3 { font-family: var(--font-display); font-weight: 600; font-size: 16.5px;
-    letter-spacing: 0.01em; margin-bottom: 7px; }
+    margin-bottom: 18px; color: var(--ink); }
+  .card h3 { font-family: var(--font-display); font-weight: 600; font-size: 16.5px; margin-bottom: 7px; }
   .card p { color: var(--dim); font-size: 14px; line-height: 1.62; }
 
-  /* ———— 页脚 ———— */
   footer { border-top: 1px solid var(--hairline); padding: 30px 0 40px; }
   .foot { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
   .foot-left { display: flex; align-items: center; gap: 10px; color: var(--faint); font-size: 13.5px; }
@@ -211,21 +198,15 @@
   .foot-links a { color: var(--dim); text-decoration: none; font-size: 13.5px; transition: color 0.18s; }
   .foot-links a:hover { color: var(--ink); }
 
-  @media (max-width: 860px) {
-    .hero { grid-template-columns: 1fr; padding: 56px 0 64px; text-align: center; }
+  @media (max-width: 880px) {
+    .hero { grid-template-columns: 1fr; padding: 52px 0 60px; text-align: center; }
     .lede { margin-inline: auto; }
-    .cta-row, .meta-row { justify-content: center; }
     .device-slot { order: -1; }
-    .device { width: 250px; height: 520px; }
-    .features-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 480px) {
     .features-grid { grid-template-columns: 1fr; }
-    .nav-links a.hide-sm { display: none; }
   }
   @media (prefers-reduced-motion: reduce) {
     .device, .falling, .clear-row { animation: none; }
-    .falling { transform: translateY(230px); }
+    .falling { transform: translateY(-130px); }
   }
 </style>
 </head>
@@ -236,7 +217,7 @@
 
 <header>
   <div class="wrap nav">
-    <a class="brand" href="#">
+    <a class="brand" href="index.html">
       <svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true">
         <rect x="3"  y="3"  width="12" height="12" rx="3.5" fill="#F0C845"/>
         <rect x="17" y="3"  width="12" height="12" rx="3.5" fill="#F293BB"/>
@@ -246,9 +227,8 @@
       <span class="brand-name">NEON&nbsp;POP</span>
     </a>
     <nav class="nav-links">
-      <a href="privacy.html" class="hide-sm">Privacy</a>
-      <a href="terms.html" class="hide-sm">Terms</a>
-      <a href="mailto:aslm2l1k123@gmail.com">Contact</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
     </nav>
   </div>
 </header>
@@ -258,68 +238,53 @@
     <div>
       <span class="eyebrow">Falling-block match puzzle</span>
       <h1>Stack the glow.<br><span class="grad">Chain the pop.</span></h1>
-      <p class="lede">Guide falling trios onto the board, line up three or more,
-        and ride the cascade. Quick runs, deep chains, zero filler.</p>
-      <div class="cta-row">
-        <a class="btn-primary" href="#" aria-disabled="true">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M4.5 3.3c-.3.3-.5.8-.5 1.4v14.6c0 .6.2 1.1.5 1.4l8.3-8.7L4.5 3.3Z"/>
-            <path d="M16.7 9.1 6.3 3.2l7.9 8.1 2.5-2.2Z" opacity="0.85"/>
-            <path d="M16.7 14.9l-2.5-2.2-7.9 8.1 10.4-5.9Z" opacity="0.7"/>
-            <path d="M20.2 10.9l-2.6-1.5-2.8 2.6 2.8 2.6 2.6-1.5c.9-.5.9-1.7 0-2.2Z" opacity="0.95"/>
-          </svg>
-          Google Play
-        </a>
-        <a class="btn-ghost" href="mailto:aslm2l1k123@gmail.com">
-          Get launch updates
-        </a>
-      </div>
-      <div class="meta-row">
-        <span class="meta">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-          Runs fit a coffee break
-        </span>
-        <span class="meta">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a7 7 0 0 0-4.9 12 4.8 4.8 0 0 1 1.4 3.4V19a2 2 0 0 0 2 2h3a2 2 0 0 0 2-2v-.6c0-1.3.5-2.5 1.4-3.4A7 7 0 0 0 12 3Z"/></svg>
-          Plays offline
-        </span>
-        <span class="meta">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-          Free to play
-        </span>
-      </div>
+      <p class="lede">Trios of neon blocks fall onto a seven-wide board. Line up three or more
+        in any direction, then watch one clear tip the next.</p>
+      <a class="btn-primary" href="#" aria-disabled="true">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M4.5 3.3c-.3.3-.5.8-.5 1.4v14.6c0 .6.2 1.1.5 1.4l8.3-8.7L4.5 3.3Z"/>
+          <path d="M16.7 9.1 6.3 3.2l7.9 8.1 2.5-2.2Z" opacity="0.85"/>
+          <path d="M16.7 14.9l-2.5-2.2-7.9 8.1 10.4-5.9Z" opacity="0.7"/>
+          <path d="M20.2 10.9l-2.6-1.5-2.8 2.6 2.8 2.6 2.6-1.5c.9-.5.9-1.7 0-2.2Z" opacity="0.95"/>
+        </svg>
+        Google Play
+      </a>
+      <p class="note">Coming soon — the store link lands here at launch.</p>
     </div>
 
     <div class="device-slot">
-      <div class="device" role="img" aria-label="NEON POP gameplay preview">
+      <div class="device" role="img" aria-label="NEON POP gameplay screen">
         <div class="screen">
-          <div class="hud">
-            <span class="hud-chip">SCORE&nbsp;&nbsp;<b>7,860</b></span>
-            <span class="hud-chip">LV&nbsp;<b>4</b></span>
-          </div>
-
-          <div class="falling">
+          <div class="hud-score"><span class="lbl">SCORE</span><div class="num">7,860</div></div>
+          <div class="hud-level">LEVEL 4</div>
+          <div class="hud-next">
+            <span class="lbl">NEXT</span>
             <div class="tile t-pink"></div>
             <div class="tile t-gold"></div>
             <div class="tile t-blue"></div>
           </div>
+          <div class="hud-pause"><i></i><i></i></div>
+
+          <div class="prog"><i></i></div>
+
+          <div class="falling">
+            <div class="tile t-green"></div>
+            <div class="tile t-red"></div>
+            <div class="tile t-red"></div>
+          </div>
 
           <div class="board" aria-hidden="true">
-            <!-- 行1 -->
-            <div class="cell"></div><div class="cell"></div><div class="cell"></div>
-            <div class="cell"></div><div class="cell"></div><div class="cell"></div>
-            <!-- 行2 -->
-            <div class="cell"></div><div class="cell"></div><div class="cell"></div>
-            <div class="cell"></div><div class="cell"></div><div class="cell"></div>
-            <!-- 行3 -->
-            <div class="cell"></div><div class="tile t-green"></div><div class="cell"></div>
-            <div class="cell"></div><div class="tile t-pink"></div><div class="cell"></div>
-            <!-- 行4 -->
-            <div class="tile t-blue"></div><div class="tile t-gold"></div><div class="cell"></div>
-            <div class="tile t-red"></div><div class="tile t-blue"></div><div class="tile t-green"></div>
-            <!-- 行5 -->
-            <div class="tile t-gold"></div><div class="tile t-red"></div><div class="tile t-pink"></div>
-            <div class="tile t-blue"></div><div class="tile t-green"></div><div class="tile t-gold"></div>
+            <!-- 上四行空 -->
+            <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+            <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+            <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+            <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+            <!-- 堆起来的五行 -->
+            <div class="cell"></div><div class="cell"></div><div class="tile t-gold"></div><div class="cell"></div><div class="cell"></div><div class="tile t-pink"></div><div class="cell"></div>
+            <div class="cell"></div><div class="tile t-blue"></div><div class="tile t-green"></div><div class="cell"></div><div class="tile t-gold"></div><div class="tile t-red"></div><div class="cell"></div>
+            <div class="tile t-pink"></div><div class="tile t-gold"></div><div class="tile t-red"></div><div class="cell"></div><div class="tile t-red"></div><div class="tile t-green"></div><div class="tile t-gold"></div>
+            <div class="tile t-green"></div><div class="tile t-red"></div><div class="tile t-blue"></div><div class="tile t-pink"></div><div class="tile t-gold"></div><div class="tile t-blue"></div><div class="tile t-red"></div>
+            <div class="tile t-gold"></div><div class="tile t-pink"></div><div class="tile t-green"></div><div class="tile t-red"></div><div class="tile t-pink"></div><div class="tile t-gold"></div><div class="tile t-green"></div>
           </div>
           <div class="clear-row"></div>
         </div>
@@ -335,8 +300,9 @@
             <path d="M13 2 4.5 13.5H11L9.5 22 19 9.5h-6.5L13 2Z"/>
           </svg>
         </div>
-        <h3>Quick, sharp runs</h3>
-        <p>Drop, slide, rotate. Every decision counts and a full run still fits inside a coffee break.</p>
+        <h3>Match in any direction</h3>
+        <p>Three or more of one colour clears — across, down, or diagonally. The board rewards
+          players who plan two pieces ahead.</p>
       </div>
       <div class="card">
         <div class="icon-tile">
@@ -348,7 +314,8 @@
           </svg>
         </div>
         <h3>Cascade combos</h3>
-        <p>One clear tips the next. Chains stack multipliers — the board practically detonates itself.</p>
+        <p>Blocks fall into the gap and can complete the next match on their own. Longer chains
+          multiply the score.</p>
       </div>
       <div class="card">
         <div class="icon-tile">
@@ -358,17 +325,8 @@
           </svg>
         </div>
         <h3>Two ways to play</h3>
-        <p>ARCADE is pure skill at two speeds. FLOW adds unlockable items and a second chance.</p>
-      </div>
-      <div class="card">
-        <div class="icon-tile">
-          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M12 3 5 6v5c0 4.4 3 8.4 7 10 4-1.6 7-5.6 7-10V6l-7-3Z"/>
-            <path d="m9.2 12 2 2 3.8-4"/>
-          </svg>
-        </div>
-        <h3>Respects your time</h3>
-        <p>Works offline, no forced ads mid-run, no energy meters. Open, play, pop, done.</p>
+        <p>ARCADE is pure skill at two speeds. FLOW adds items you unlock as you level up, plus
+          one second chance per run.</p>
       </div>
     </div>
   </section>
@@ -388,7 +346,6 @@
     <nav class="foot-links">
       <a href="privacy.html">Privacy Policy</a>
       <a href="terms.html">Terms of Service</a>
-      <a href="mailto:aslm2l1k123@gmail.com">aslm2l1k123@gmail.com</a>
     </nav>
   </div>
 </footer>
