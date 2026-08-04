@@ -8,7 +8,7 @@ Read them here: **<https://wish-go.github.io/neonpop-legal/>**
 - [Privacy Policy](https://wish-go.github.io/neonpop-legal/privacy.html) — what the game
   collects, why, and how to have it deleted
 - [Terms of Service](https://wish-go.github.io/neonpop-legal/terms.html) — the licence to
-  play and the rules around names and leaderboards
+  play and the rules around display names
 
 The game's site is at [wish-go.github.io/neon-pop](https://wish-go.github.io/neon-pop/)
 ([repo](https://github.com/Wish-Go/neon-pop)).

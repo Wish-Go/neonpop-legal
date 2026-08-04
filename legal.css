@@ -2,11 +2,13 @@
   --black: #000;
   --panel: #0a0a0d;
   --ink: #f5f5f7;
+  --ink-2: var(--ink-2);   /* 正文灰,介于 ink 与 grey 之间 */
   --grey: #86868b;
   --line: rgba(255, 255, 255, 0.1);
   --link: #2997ff;
   --shell: 980px;
   --measure: 692px;
+  color-scheme: dark;
   --sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
           "Helvetica Neue", "Segoe UI", system-ui, sans-serif;
 }
@@ -111,7 +113,7 @@ footer .spacer { margin-left: auto; }
   margin: 40px 0 12px; scroll-margin-top: 76px;
 }
 .doc h2 + h3 { margin-top: 26px; }
-.doc p, .doc li { color: #c7c7cc; font-size: 17px; line-height: 1.65; }
+.doc p, .doc li { color: var(--ink-2); font-size: 17px; line-height: 1.65; }
 .doc p + p { margin-top: 17px; }
 .doc ul { margin: 18px 0 0; padding-left: 22px; }
 .doc li { margin-bottom: 12px; }
@@ -163,6 +165,12 @@ code {
 
 footer .measure { display: flex; flex-wrap: wrap; gap: 12px 26px; align-items: center; }
 
+/* 正文在 >=1060px 拉宽到 976,页脚不跟就会右边界错开一大截 */
+@media (min-width: 1060px) {
+  .doc.with-toc ~ footer .measure,
+  footer .measure { max-width: 976px; }
+}
+
 
 /* 侧栏只在「确实有目录」的页面上开(section 带 .with-toc)。
    之前这条挂在 .doc .measure 上,索引页没目录也吃到了栅格,
@@ -200,7 +208,7 @@ th, td {
   padding: 16px 16px;
   border-bottom: 1px solid var(--line);
   vertical-align: top;
-  color: #c7c7cc;
+  color: var(--ink-2);
 }
 th {
   color: var(--grey);
@@ -211,12 +219,21 @@ th {
   border-bottom-color: rgba(255, 255, 255, 0.2);
 }
 td a { overflow-wrap: anywhere; }
-.doc-body > table { display: table; }
 
 @media (max-width: 620px) {
-  table, thead, tbody, tr, th, td { display: block; }
+  table, tbody, tr, td { display: block; }
+  /* 整行隐藏而不是只隐藏 th:只隐藏单元格的话,表头那个 tr 仍占位,
+     顶着 padding 和分隔线留下一条空带 */
+  thead, tr:first-child:has(th) { display: none; }
   th { display: none; }
-  tr { border-bottom: 1px solid var(--line); padding: 12px 0; }
-  td { border: 0; padding: 3px 0; }
+  tr { border-bottom: 1px solid var(--line); padding: 14px 0; }
+  td { border: 0; padding: 5px 0 5px 0; }
+  /* 表头隐藏后列名必须由单元格自己带出来,否则读不出哪格是哪列 */
+  td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--grey); margin-bottom: 2px;
+  }
   td:first-child { color: var(--ink); font-weight: 600; }
 }
