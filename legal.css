@@ -158,17 +158,20 @@ code {
 footer .measure { display: flex; flex-wrap: wrap; gap: 12px 26px; align-items: center; }
 
 
-/* 单栏里给目录上 sticky 会钉住视口、正文从底下穿过去。
-   够宽时才拆成「侧栏 + 正文」两列 —— sticky 需要一个够高的同级兄弟才站得住。 */
+/* 侧栏只在「确实有目录」的页面上开(section 带 .with-toc)。
+   之前这条挂在 .doc .measure 上,索引页没目录也吃到了栅格,
+   三个子元素被自动塞进两列 —— 标题在左、正文在右、卡片又回左。 */
 @media (min-width: 1060px) {
-  .doc .measure {
+  .doc.with-toc .measure {
     max-width: 976px;
     display: grid;
     grid-template-columns: 212px minmax(0, 1fr);
-    column-gap: 52px;
+    column-gap: 56px;
     align-items: start;
   }
-  .toc {
+  .doc.with-toc .toc {
+    grid-column: 1;
+    grid-row: 1;
     position: sticky;
     top: 68px;
     margin-bottom: 0;
@@ -176,7 +179,8 @@ footer .measure { display: flex; flex-wrap: wrap; gap: 12px 26px; align-items: c
     overflow-y: auto;
     overscroll-behavior: contain;
   }
-  .doc h1 { margin-top: -4px; }
+  .doc.with-toc .doc-body { grid-column: 2; grid-row: 1; min-width: 0; }
+  .doc.with-toc h1 { margin-top: -6px; }
 }
 
 table {
