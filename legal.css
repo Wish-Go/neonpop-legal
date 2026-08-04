@@ -157,6 +157,56 @@ code {
 
 footer .measure { display: flex; flex-wrap: wrap; gap: 12px 26px; align-items: center; }
 
-@media (min-width: 900px) {
-  .toc { position: sticky; top: 64px; }
+
+/* 单栏里给目录上 sticky 会钉住视口、正文从底下穿过去。
+   够宽时才拆成「侧栏 + 正文」两列 —— sticky 需要一个够高的同级兄弟才站得住。 */
+@media (min-width: 1060px) {
+  .doc .measure {
+    max-width: 976px;
+    display: grid;
+    grid-template-columns: 212px minmax(0, 1fr);
+    column-gap: 52px;
+    align-items: start;
+  }
+  .toc {
+    position: sticky;
+    top: 68px;
+    margin-bottom: 0;
+    max-height: calc(100vh - 104px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .doc h1 { margin-top: -4px; }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 15px;
+}
+th, td {
+  text-align: left;
+  padding: 13px 14px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+  color: #c7c7cc;
+}
+th {
+  color: var(--grey);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+td a { overflow-wrap: anywhere; }
+.doc-body > table { display: table; }
+
+@media (max-width: 620px) {
+  table, thead, tbody, tr, th, td { display: block; }
+  th { display: none; }
+  tr { border-bottom: 1px solid var(--line); padding: 12px 0; }
+  td { border: 0; padding: 3px 0; }
+  td:first-child { color: var(--ink); font-weight: 600; }
 }
