@@ -1,300 +1,225 @@
 <!DOCTYPE html>
+<!--
+  This file's URL is compiled into the shipped app binary (PloxLinks) and is
+  registered in the Play Console. Renaming this repo or this file 404s the
+  in-game Privacy / Terms buttons for every already-installed copy, and only a
+  new app build can fix it. Edit the contents freely; leave the path alone.
+-->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy Policy — NEON POP</title>
 <meta name="description" content="What NEON POP collects, why, and the choices you have.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='3' width='12' height='12' rx='3' fill='%23F0C845'/%3E%3Crect x='17' y='3' width='12' height='12' rx='3' fill='%23F293BB'/%3E%3Crect x='3' y='17' width='12' height='12' rx='3' fill='%235CB8E7'/%3E%3Crect x='17' y='17' width='12' height='12' rx='3' fill='%2382D179'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #0B0716;
-    --surface: rgba(255, 255, 255, 0.03);
-    --hairline: rgba(255, 255, 255, 0.08);
-    --hairline-strong: rgba(255, 255, 255, 0.14);
-    --ink: #EDE9FA;
-    --dim: #9D93BE;
-    --faint: #6B6288;
-    --gold: #F0C845;
-    --blue: #5CB8E7;
-    --font-display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
-    --font-body: "Inter", "Segoe UI", system-ui, sans-serif;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    background: var(--bg); color: var(--ink);
-    font-family: var(--font-body); font-size: 16px; line-height: 1.7;
-    -webkit-font-smoothing: antialiased; overflow-x: hidden;
-  }
-  .orb { position: fixed; border-radius: 50%; filter: blur(110px); z-index: -1; pointer-events: none; }
-  .orb-a { width: 480px; height: 480px; top: -200px; right: -140px; background: rgba(242, 147, 187, 0.10); }
-  .orb-b { width: 420px; height: 420px; bottom: -220px; left: -160px; background: rgba(92, 184, 231, 0.08); }
-
-  header {
-    position: sticky; top: 0; z-index: 10;
-    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-    background: rgba(11, 7, 22, 0.72);
-    border-bottom: 1px solid var(--hairline);
-  }
-  .nav { max-width: 1060px; margin: 0 auto; padding: 0 28px;
-    display: flex; align-items: center; justify-content: space-between; height: 64px; }
-  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
-  .brand-name { font-family: var(--font-display); font-weight: 700; font-size: 17px; letter-spacing: 0.16em; }
-  .nav-links { display: flex; align-items: center; gap: 26px; }
-  .nav-links a { color: var(--dim); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.18s; }
-  .nav-links a:hover { color: var(--ink); }
-  .nav-links a.active { color: var(--ink); }
-
-  .doc { max-width: 760px; margin: 0 auto; padding: 64px 28px 80px; }
-  .eyebrow {
-    display: inline-flex; align-items: center; gap: 8px;
-    border: 1px solid var(--hairline-strong); border-radius: 999px;
-    padding: 5px 13px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.14em;
-    color: var(--dim); text-transform: uppercase; margin-bottom: 22px;
-  }
-  .eyebrow::before { content: ""; width: 6px; height: 6px; border-radius: 50%;
-    background: var(--gold); box-shadow: 0 0 8px var(--gold); }
-  .doc h1 { font-family: var(--font-display); font-weight: 700;
-    font-size: clamp(32px, 4.6vw, 44px); letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 10px; }
-  .doc .meta { color: var(--faint); font-size: 14px; margin-bottom: 40px; }
-
-  .doc h2 { font-family: var(--font-display); font-weight: 600; font-size: 21px;
-    letter-spacing: -0.01em; margin: 44px 0 12px; padding-top: 28px;
-    border-top: 1px solid var(--hairline); }
-  .doc h3 { font-family: var(--font-display); font-weight: 600; font-size: 16.5px;
-    color: var(--ink); margin: 26px 0 8px; }
-  .doc p { color: var(--dim); margin-bottom: 14px; }
-  .doc ul { color: var(--dim); margin: 0 0 14px 20px; }
-  .doc li { margin-bottom: 7px; }
-  .doc li::marker { color: var(--faint); }
-  .doc strong { color: var(--ink); font-weight: 600; }
-  .doc a { color: var(--blue); text-decoration: none; border-bottom: 1px solid rgba(92, 184, 231, 0.3); }
-  .doc a:hover { border-bottom-color: var(--blue); }
-  .doc code { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: 14px;
-    background: var(--surface); border: 1px solid var(--hairline); border-radius: 6px; padding: 1.5px 7px; }
-  .doc .box {
-    background: var(--surface); border: 1px solid var(--hairline-strong);
-    border-left: 3px solid var(--gold);
-    border-radius: 12px; padding: 18px 20px; margin: 22px 0; color: var(--dim);
-  }
-  .doc table { width: 100%; border-collapse: collapse; margin: 0 0 14px; font-size: 14.5px; }
-  .doc th, .doc td { text-align: left; padding: 10px 12px; border: 1px solid var(--hairline);
-    color: var(--dim); vertical-align: top; }
-  .doc th { color: var(--ink); font-weight: 600; background: var(--surface); }
-
-  footer.site { border-top: 1px solid var(--hairline); padding: 28px 0 38px; }
-  .foot { max-width: 1060px; margin: 0 auto; padding: 0 28px;
-    display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
-  .foot-left { display: flex; align-items: center; gap: 10px; color: var(--faint); font-size: 13.5px; }
-  .foot-links { display: flex; gap: 24px; }
-  .foot-links a { color: var(--dim); text-decoration: none; font-size: 13.5px; transition: color 0.18s; }
-  .foot-links a:hover { color: var(--ink); }
-</style>
+<link rel="canonical" href="https://wish-go.github.io/neonpop-legal/privacy.html">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="assets/icon-180.png">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+<link rel="stylesheet" href="legal.css">
 </head>
 <body>
-<div class="orb orb-a"></div>
-<div class="orb orb-b"></div>
 
-<header>
-  <div class="nav">
-    <a class="brand" href="index.html">
-      <svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-        <rect x="3"  y="3"  width="12" height="12" rx="3.5" fill="#F0C845"/>
-        <rect x="17" y="3"  width="12" height="12" rx="3.5" fill="#F293BB"/>
-        <rect x="3"  y="17" width="12" height="12" rx="3.5" fill="#5CB8E7"/>
-        <rect x="17" y="17" width="12" height="12" rx="3.5" fill="#82D179"/>
-      </svg>
-      <span class="brand-name">NEON&nbsp;POP</span>
+<nav class="nav">
+  <div class="nav-in">
+    <a class="nav-mark" href="./">
+      <img src="assets/icon-180.png" alt="">
+      <span class="nav-name">NEON POP</span>
     </a>
-    <nav class="nav-links">
-      <a href="privacy.html" class="active">Privacy</a>
+    <div class="nav-links">
+      <a href="privacy.html" class="on">Privacy</a>
       <a href="terms.html">Terms</a>
-      <a href="mailto:aslm2l1k123@gmail.com">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<main class="doc">
-  <span class="eyebrow">Legal</span>
-<h1>Privacy Policy</h1>
-<p class="meta">NEON POP · Last updated: 29 July 2026 · Effective: 29 July 2026</p>
-
-<p>This Privacy Policy explains what information the mobile game <strong>NEON POP</strong> ("the Game", "we", "us")
-collects, why we collect it, and the choices you have. It applies to the Game distributed under the application ID
-<code>com.neonpop.game</code>.</p>
-
-<div class="box">
-<strong>Short version.</strong> We do not ask for your name, email address, phone number or any account sign-up to play.
-We do not sell your data and we do not show advertising. The Game uses analytics and crash-reporting tools, and — only
-if you choose to submit a score — an online leaderboard service.
-</div>
-
-<h2>1. Who is responsible</h2>
-<p>The Game is developed and published by the NEON POP development team ("the Developer"). If you have any question
-about this policy or about your data, contact us at <a href="mailto:aslm2l1k123@gmail.com">aslm2l1k123@gmail.com</a>.</p>
-
-<h2>2. Information we collect</h2>
-
-<h3>2.1 Stored only on your device</h3>
-<p>The following is saved locally on your device and is not transmitted to us. It is removed when you uninstall the Game.</p>
-<ul>
-  <li>Your game settings (sound, music, vibration and colour-blind assistance toggles).</li>
-  <li>Your personal best scores for each difficulty.</li>
-  <li>Your chosen display name and region code.</li>
-  <li>Bookkeeping needed for score submission (for example, which score has already been uploaded this week).</li>
-</ul>
-
-<h3>2.2 Collected automatically for analytics and stability</h3>
-<p>The Game includes Google Firebase Analytics and Google Firebase Crashlytics. These tools collect technical and usage
-information so that we can understand how the Game performs and fix crashes.</p>
-<table>
-  <tr><th>Category</th><th>Examples</th><th>Purpose</th></tr>
-  <tr>
-    <td>Device &amp; app information</td>
-    <td>Device model, operating system version, language, country/region, Game version, mobile app instance identifier</td>
-    <td>Understand which devices to support; diagnose problems</td>
-  </tr>
-  <tr>
-    <td>Usage information</td>
-    <td>App opens, session length, screens viewed, in-game events</td>
-    <td>Understand how the Game is used and where players get stuck</td>
-  </tr>
-  <tr>
-    <td>Crash diagnostics</td>
-    <td>Stack traces, device state at the time of a crash, Game version</td>
-    <td>Find and fix crashes and errors</td>
-  </tr>
-</table>
-<p>Firebase assigns a resettable, pseudonymous app-instance identifier. We do not use it to identify you personally,
-and we do not combine it with your real-world identity.</p>
-
-<h3>2.3 Collected when you use the online leaderboard</h3>
-<p>The Game uses Unity Gaming Services (Unity Authentication and Unity Leaderboards) to run the weekly leaderboards.
-This only happens in connection with leaderboard features.</p>
-<ul>
-  <li><strong>Anonymous player identifier</strong> — generated by Unity Authentication. It is not linked to an email
-      address, phone number, or social account, and you are never asked to sign up.</li>
-  <li><strong>Display name</strong> — the name you type in the Game. Please do not use your real name or any other
-      personal information: this name is shown publicly to other players on the leaderboard.</li>
-  <li><strong>Score, difficulty and approximate region</strong> — needed to place your entry on the correct board.
-      The region is derived at country/state level only; we do not collect GPS or precise location.</li>
-</ul>
-<p>You are not required to submit a score. If you never submit, no leaderboard data leaves your device.</p>
-
-<h3>2.4 Information you send us voluntarily</h3>
-<p>If you use the in-game <em>Feedback</em> button, your email app opens with a pre-filled message containing your
-player identifier, display name, region, Game version and platform. You can edit or delete any part of that message
-before sending. We use what you send only to answer you.</p>
-
-<h2>3. What we do not do</h2>
-<ul>
-  <li>We do not display advertising and we do not include any advertising SDK.</li>
-  <li>We do not sell or rent your personal information, and we do not share it for cross-context behavioural advertising.</li>
-  <li>We do not collect your contacts, photos, microphone input, or precise location.</li>
-  <li>We do not require an account, an email address, or a phone number.</li>
-</ul>
-
-<h2>4. Legal bases (for players in the EEA and the UK)</h2>
-<ul>
-  <li><strong>Performance of a contract</strong> — operating the Game and, where you choose to use them, the leaderboards.</li>
-  <li><strong>Legitimate interests</strong> — keeping the Game stable and secure, understanding aggregate usage, and
-      preventing cheating and abuse.</li>
-  <li><strong>Consent</strong> — where consent is required by local law, we ask for it before collecting the data
-      concerned, and you can withdraw it at any time.</li>
-</ul>
-
-<h2>5. Service providers</h2>
-<p>We share information only with the providers needed to run the Game. They process it on our behalf and under their
-own privacy terms.</p>
-<table>
-  <tr><th>Provider</th><th>Used for</th><th>Their privacy policy</th></tr>
-  <tr>
-    <td>Google (Firebase Analytics, Crashlytics)</td>
-    <td>Usage analytics, crash reporting</td>
-    <td><a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">firebase.google.com/support/privacy</a></td>
-  </tr>
-  <tr>
-    <td>Unity Technologies (Unity Gaming Services)</td>
-    <td>Anonymous authentication, leaderboards</td>
-    <td><a href="https://unity.com/legal/game-player-and-app-user-privacy-policy" target="_blank" rel="noopener">unity.com/legal/game-player-and-app-user-privacy-policy</a></td>
-  </tr>
-  <tr>
-    <td>Google Play</td>
-    <td>Distribution and app updates</td>
-    <td><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></td>
-  </tr>
-</table>
-<p>We may also disclose information if we are legally required to do so, or where it is necessary to protect our rights
-or the safety of players.</p>
-
-<h2>6. International transfers</h2>
-<p>Our providers operate globally, so your information may be processed on servers outside your country. Where such a
-transfer involves personal data protected by EEA, UK or similar law, our providers rely on recognised transfer
-mechanisms such as the European Commission's Standard Contractual Clauses.</p>
-
-<h2>7. How long we keep information</h2>
-<ul>
-  <li><strong>On-device data</strong> — until you clear the Game's data or uninstall it.</li>
-  <li><strong>Analytics data</strong> — retained by Firebase according to the retention period configured in the
-      Firebase console, after which it is deleted or aggregated.</li>
-  <li><strong>Crash reports</strong> — retained for up to 90 days by Crashlytics.</li>
-  <li><strong>Leaderboard entries</strong> — leaderboards reset weekly; archived entries may be kept so that historical
-      rankings remain available.</li>
-</ul>
-
-<h2>8. Your rights and choices</h2>
-<ul>
-  <li><strong>Delete local data</strong> — uninstall the Game, or clear its storage in your device settings.</li>
-  <li><strong>Access, correction or deletion</strong> — email <a href="mailto:aslm2l1k123@gmail.com">aslm2l1k123@gmail.com</a>
-      from the device where you play and include the player identifier shown in the Feedback message. We will respond
-      within the period required by applicable law (30 days in most jurisdictions).</li>
-  <li><strong>Change your display name</strong> — request it through the Feedback button.</li>
-  <li><strong>Opt out of analytics</strong> — you can limit ad and analytics identifiers in your device settings
-      (Android: Settings → Privacy → Ads). Deleting the Game stops all collection.</li>
-  <li><strong>Complain to a regulator</strong> — if you are in the EEA or the UK you may lodge a complaint with your
-      local supervisory authority.</li>
-</ul>
-<p>We do not discriminate against you for exercising any of these rights.</p>
-
-<h2>9. Children</h2>
-<p>The Game is not directed to children under 13 (or the equivalent minimum age in your country), and we do not
-knowingly collect personal information from them. If you believe a child has provided us with personal information,
-contact us and we will delete it.</p>
-
-<h2>10. Security</h2>
-<p>Data transmitted between the Game and our providers is encrypted in transit using HTTPS/TLS. No method of
-transmission or storage is completely secure, but we take reasonable measures to protect the limited information we
-handle.</p>
-
-<h2>11. Changes to this policy</h2>
-<p>We may update this policy as the Game evolves. When we do, we will change the "Last updated" date at the top of this
-page. Material changes will also be announced in the Game or on its store listing.</p>
-
-<h2>12. Contact</h2>
-<p>Questions, requests, or complaints: <a href="mailto:aslm2l1k123@gmail.com">aslm2l1k123@gmail.com</a></p>
-</main>
-
-<footer class="site">
-  <div class="foot">
-    <div class="foot-left">
-      <svg width="18" height="18" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-        <rect x="3"  y="3"  width="12" height="12" rx="3.5" fill="#F0C845"/>
-        <rect x="17" y="3"  width="12" height="12" rx="3.5" fill="#F293BB"/>
-        <rect x="3"  y="17" width="12" height="12" rx="3.5" fill="#5CB8E7"/>
-        <rect x="17" y="17" width="12" height="12" rx="3.5" fill="#82D179"/>
-      </svg>
-      <span>© 2026 NEON POP team</span>
     </div>
-    <nav class="foot-links">
-      <a href="index.html">Home</a>
-      <a href="privacy.html">Privacy Policy</a>
-      <a href="terms.html">Terms of Service</a>
-      <a href="mailto:aslm2l1k123@gmail.com">aslm2l1k123@gmail.com</a>
+  </div>
+</nav>
+
+<section class="doc">
+  <div class="measure">
+    <nav class="toc">
+      <p>On this page</p>
+      <ol>
+        <li><a href="#who-is-responsible">Who is responsible</a></li>
+        <li><a href="#information-we-collect">Information we collect</a></li>
+        <li><a href="#what-we-do-not-do">What we do not do</a></li>
+        <li><a href="#legal-bases-for-players-in-the-eea-and-the-uk">Legal bases (for players in the EEA and the UK)</a></li>
+        <li><a href="#service-providers">Service providers</a></li>
+        <li><a href="#international-transfers">International transfers</a></li>
+        <li><a href="#how-long-we-keep-information">How long we keep information</a></li>
+        <li><a href="#your-rights-and-choices">Your rights and choices</a></li>
+        <li><a href="#children">Children</a></li>
+        <li><a href="#security">Security</a></li>
+        <li><a href="#changes-to-this-policy">Changes to this policy</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ol>
     </nav>
+    <h1>Privacy Policy</h1>
+    <p class="stamp">NEON POP · Last updated: 29 July 2026 · Effective: 29 July 2026</p>
+
+    <p>This Privacy Policy explains what information the mobile game <strong>NEON POP</strong> ("the Game", "we", "us")
+    collects, why we collect it, and the choices you have. It applies to the Game distributed under the application ID
+    <code>com.neonpop.game</code>.</p>
+
+    <div class="callout"><p><strong>Short version.</strong> We do not ask for your name, email address, phone number or any account sign-up to play.
+    We do not sell your data and we do not show advertising. The Game uses analytics and crash-reporting tools, and — only
+    if you choose to submit a score — an online leaderboard service.</p></div>
+
+    <h2 id="who-is-responsible">1. Who is responsible</h2>
+    <p>The Game is developed and published by the NEON POP development team ("the Developer"). If you have any question
+    about this policy or about your data, contact us at <a href="mailto:aslm2l1k123@gmail.com">aslm2l1k123@gmail.com</a>.</p>
+
+    <h2 id="information-we-collect">2. Information we collect</h2>
+
+    <h3>2.1 Stored only on your device</h3>
+    <p>The following is saved locally on your device and is not transmitted to us. It is removed when you uninstall the Game.</p>
+    <ul>
+      <li>Your game settings (sound, music, vibration and colour-blind assistance toggles).</li>
+      <li>Your personal best scores for each difficulty.</li>
+      <li>Your chosen display name and region code.</li>
+      <li>Bookkeeping needed for score submission (for example, which score has already been uploaded this week).</li>
+    </ul>
+
+    <h3>2.2 Collected automatically for analytics and stability</h3>
+    <p>The Game includes Google Firebase Analytics and Google Firebase Crashlytics. These tools collect technical and usage
+    information so that we can understand how the Game performs and fix crashes.</p>
+    <table>
+      <tr><th>Category</th><th>Examples</th><th>Purpose</th></tr>
+      <tr>
+        <td>Device &amp; app information</td>
+        <td>Device model, operating system version, language, country/region, Game version, mobile app instance identifier</td>
+        <td>Understand which devices to support; diagnose problems</td>
+      </tr>
+      <tr>
+        <td>Usage information</td>
+        <td>App opens, session length, screens viewed, in-game events</td>
+        <td>Understand how the Game is used and where players get stuck</td>
+      </tr>
+      <tr>
+        <td>Crash diagnostics</td>
+        <td>Stack traces, device state at the time of a crash, Game version</td>
+        <td>Find and fix crashes and errors</td>
+      </tr>
+    </table>
+    <p>Firebase assigns a resettable, pseudonymous app-instance identifier. We do not use it to identify you personally,
+    and we do not combine it with your real-world identity.</p>
+
+    <h3>2.3 Collected when you use the online leaderboard</h3>
+    <p>The Game uses Unity Gaming Services (Unity Authentication and Unity Leaderboards) to run the weekly leaderboards.
+    This only happens in connection with leaderboard features.</p>
+    <ul>
+      <li><strong>Anonymous player identifier</strong> — generated by Unity Authentication. It is not linked to an email
+          address, phone number, or social account, and you are never asked to sign up.</li>
+      <li><strong>Display name</strong> — the name you type in the Game. Please do not use your real name or any other
+          personal information: this name is shown publicly to other players on the leaderboard.</li>
+      <li><strong>Score, difficulty and approximate region</strong> — needed to place your entry on the correct board.
+          The region is derived at country/state level only; we do not collect GPS or precise location.</li>
+    </ul>
+    <p>You are not required to submit a score. If you never submit, no leaderboard data leaves your device.</p>
+
+    <h3>2.4 Information you send us voluntarily</h3>
+    <p>If you use the in-game <em>Feedback</em> button, your email app opens with a pre-filled message containing your
+    player identifier, display name, region, Game version and platform. You can edit or delete any part of that message
+    before sending. We use what you send only to answer you.</p>
+
+    <h2 id="what-we-do-not-do">3. What we do not do</h2>
+    <ul>
+      <li>We do not display advertising and we do not include any advertising SDK.</li>
+      <li>We do not sell or rent your personal information, and we do not share it for cross-context behavioural advertising.</li>
+      <li>We do not collect your contacts, photos, microphone input, or precise location.</li>
+      <li>We do not require an account, an email address, or a phone number.</li>
+    </ul>
+
+    <h2 id="legal-bases-for-players-in-the-eea-and-the-uk">4. Legal bases (for players in the EEA and the UK)</h2>
+    <ul>
+      <li><strong>Performance of a contract</strong> — operating the Game and, where you choose to use them, the leaderboards.</li>
+      <li><strong>Legitimate interests</strong> — keeping the Game stable and secure, understanding aggregate usage, and
+          preventing cheating and abuse.</li>
+      <li><strong>Consent</strong> — where consent is required by local law, we ask for it before collecting the data
+          concerned, and you can withdraw it at any time.</li>
+    </ul>
+
+    <h2 id="service-providers">5. Service providers</h2>
+    <p>We share information only with the providers needed to run the Game. They process it on our behalf and under their
+    own privacy terms.</p>
+    <table>
+      <tr><th>Provider</th><th>Used for</th><th>Their privacy policy</th></tr>
+      <tr>
+        <td>Google (Firebase Analytics, Crashlytics)</td>
+        <td>Usage analytics, crash reporting</td>
+        <td><a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">firebase.google.com/support/privacy</a></td>
+      </tr>
+      <tr>
+        <td>Unity Technologies (Unity Gaming Services)</td>
+        <td>Anonymous authentication, leaderboards</td>
+        <td><a href="https://unity.com/legal/game-player-and-app-user-privacy-policy" target="_blank" rel="noopener">unity.com/legal/game-player-and-app-user-privacy-policy</a></td>
+      </tr>
+      <tr>
+        <td>Google Play</td>
+        <td>Distribution and app updates</td>
+        <td><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></td>
+      </tr>
+    </table>
+    <p>We may also disclose information if we are legally required to do so, or where it is necessary to protect our rights
+    or the safety of players.</p>
+
+    <h2 id="international-transfers">6. International transfers</h2>
+    <p>Our providers operate globally, so your information may be processed on servers outside your country. Where such a
+    transfer involves personal data protected by EEA, UK or similar law, our providers rely on recognised transfer
+    mechanisms such as the European Commission's Standard Contractual Clauses.</p>
+
+    <h2 id="how-long-we-keep-information">7. How long we keep information</h2>
+    <ul>
+      <li><strong>On-device data</strong> — until you clear the Game's data or uninstall it.</li>
+      <li><strong>Analytics data</strong> — retained by Firebase according to the retention period configured in the
+          Firebase console, after which it is deleted or aggregated.</li>
+      <li><strong>Crash reports</strong> — retained for up to 90 days by Crashlytics.</li>
+      <li><strong>Leaderboard entries</strong> — leaderboards reset weekly; archived entries may be kept so that historical
+          rankings remain available.</li>
+    </ul>
+
+    <h2 id="your-rights-and-choices">8. Your rights and choices</h2>
+    <ul>
+      <li><strong>Delete local data</strong> — uninstall the Game, or clear its storage in your device settings.</li>
+      <li><strong>Access, correction or deletion</strong> — email <a href="mailto:aslm2l1k123@gmail.com">aslm2l1k123@gmail.com</a>
+          from the device where you play and include the player identifier shown in the Feedback message. We will respond
+          within the period required by applicable law (30 days in most jurisdictions).</li>
+      <li><strong>Change your display name</strong> — request it through the Feedback button.</li>
+      <li><strong>Opt out of analytics</strong> — you can limit ad and analytics identifiers in your device settings
+          (Android: Settings → Privacy → Ads). Deleting the Game stops all collection.</li>
+      <li><strong>Complain to a regulator</strong> — if you are in the EEA or the UK you may lodge a complaint with your
+          local supervisory authority.</li>
+    </ul>
+    <p>We do not discriminate against you for exercising any of these rights.</p>
+
+    <h2 id="children">9. Children</h2>
+    <p>The Game is not directed to children under 13 (or the equivalent minimum age in your country), and we do not
+    knowingly collect personal information from them. If you believe a child has provided us with personal information,
+    contact us and we will delete it.</p>
+
+    <h2 id="security">10. Security</h2>
+    <p>Data transmitted between the Game and our providers is encrypted in transit using HTTPS/TLS. No method of
+    transmission or storage is completely secure, but we take reasonable measures to protect the limited information we
+    handle.</p>
+
+    <h2 id="changes-to-this-policy">11. Changes to this policy</h2>
+    <p>We may update this policy as the Game evolves. When we do, we will change the "Last updated" date at the top of this
+    page. Material changes will also be announced in the Game or on its store listing.</p>
+
+    <h2 id="contact">12. Contact</h2>
+    <p>Questions, requests, or complaints: <a href="mailto:aslm2l1k123@gmail.com">aslm2l1k123@gmail.com</a></p>
+    <div class="contact">
+      <p class="sub">Questions about this document? Email
+      <a href="mailto:aslm2l1k123@gmail.com">aslm2l1k123@gmail.com</a>.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="measure">
+    <span>NEON POP</span>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+    <a class="spacer" href="https://wish-go.github.io/neon-pop/">Official site</a>
   </div>
 </footer>
+
 </body>
 </html>

@@ -2,143 +2,90 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NEON POP — Legal</title>
-<meta name="description" content="Privacy policy and terms of service for the NEON POP mobile game.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Legal — NEON POP</title>
+<meta name="description" content="Privacy Policy and Terms of Service for the mobile game NEON POP.">
 <link rel="canonical" href="https://wish-go.github.io/neonpop-legal/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='3' width='12' height='12' rx='3' fill='%23F0C845'/%3E%3Crect x='17' y='3' width='12' height='12' rx='3' fill='%23F293BB'/%3E%3Crect x='3' y='17' width='12' height='12' rx='3' fill='%235CB8E7'/%3E%3Crect x='17' y='17' width='12' height='12' rx='3' fill='%2382D179'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="assets/icon-180.png">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+<link rel="stylesheet" href="legal.css">
 <style>
-  :root {
-    --bg: #0B0716;
-    --surface: rgba(255, 255, 255, 0.03);
-    --surface-hover: rgba(255, 255, 255, 0.055);
-    --hairline: rgba(255, 255, 255, 0.08);
-    --hairline-strong: rgba(255, 255, 255, 0.14);
-    --ink: #EDE9FA;
-    --dim: #9D93BE;
-    --faint: #6B6288;
-    --gold: #F0C845;
-    --pink: #F293BB;
-    --blue: #5CB8E7;
-    --green: #82D179;
-    --font-display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
-    --font-body: "Inter", "Segoe UI", system-ui, sans-serif;
+  .index-list { display: grid; gap: 14px; margin-top: 44px; }
+  .entry {
+    display: flex; align-items: baseline; gap: 20px;
+    padding: 26px 28px; text-decoration: none; color: inherit;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--line); border-radius: 18px;
+    transition: background .2s ease, border-color .2s ease;
   }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    background: var(--bg); color: var(--ink);
-    font-family: var(--font-body); font-size: 16px; line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    min-height: 100vh; display: flex; flex-direction: column;
+  .entry:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 255, 255, 0.2);
+    text-decoration: none;
   }
-  .ambient {
-    position: fixed; inset: 0; z-index: -1; pointer-events: none;
-    background-image: radial-gradient(rgba(255,255,255,0.045) 1px, transparent 1px);
-    background-size: 28px 28px;
-    mask-image: radial-gradient(70% 55% at 50% 25%, #000 0%, transparent 100%);
-    -webkit-mask-image: radial-gradient(70% 55% at 50% 25%, #000 0%, transparent 100%);
+  .entry-n {
+    font-size: 13px; color: var(--grey); font-variant-numeric: tabular-nums;
+    flex: none; padding-top: 4px;
   }
-  main {
-    flex: 1; width: 100%; max-width: 640px; margin: 0 auto;
-    padding: clamp(72px, 14vh, 152px) 24px 64px;
-  }
-  .mark { display: flex; gap: 6px; margin-bottom: 28px; }
-  .mark i { width: 15px; height: 15px; border-radius: 4px; display: block; }
-  .eyebrow {
-    font-family: var(--font-display); font-size: 12px; font-weight: 600;
-    letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint);
-    margin-bottom: 10px;
-  }
-  h1 {
-    font-family: var(--font-display); font-weight: 700;
-    font-size: clamp(34px, 6vw, 46px); line-height: 1.1;
-    letter-spacing: -0.02em; margin-bottom: 14px;
-  }
-  .lede { color: var(--dim); font-size: 17px; margin-bottom: 44px; max-width: 52ch; }
-  .docs { display: grid; gap: 12px; }
-  .doc {
-    display: flex; align-items: center; gap: 18px;
-    padding: 20px 22px; text-decoration: none; color: inherit;
-    background: var(--surface); border: 1px solid var(--hairline);
-    border-radius: 14px;
-    transition: background .18s ease, border-color .18s ease, transform .18s ease;
-  }
-  .doc:hover {
-    background: var(--surface-hover); border-color: var(--hairline-strong);
-    transform: translateY(-1px);
-  }
-  .doc > svg { flex: none; width: 22px; height: 22px; stroke-width: 1.6; }
-  .doc-body { flex: 1; min-width: 0; display: block; }
-  .doc-title { font-family: var(--font-display); font-weight: 600; font-size: 17px; display: block; }
-  .doc-note { color: var(--faint); font-size: 14px; margin-top: 2px; display: block; }
-  .doc-go { color: var(--faint); flex: none; width: 18px; height: 18px; }
-  .doc:hover .doc-go { color: var(--dim); }
-  footer {
-    border-top: 1px solid var(--hairline);
-    padding: 26px 24px 34px; text-align: center;
-    color: var(--faint); font-size: 14px;
-  }
-  footer a { color: var(--dim); text-decoration: none; }
-  footer a:hover { color: var(--ink); text-decoration: underline; }
-  .sep { margin: 0 10px; opacity: .5; }
+  .entry-b { flex: 1; min-width: 0; }
+  .entry h3 { font-size: 21px; margin-bottom: 5px; }
+  .entry p { color: var(--grey); font-size: 15px; line-height: 1.5; }
+  .entry-go { color: var(--grey); font-size: 20px; flex: none; align-self: center; }
+  .entry:hover .entry-go { color: var(--ink); }
 </style>
 </head>
 <body>
-<div class="ambient"></div>
 
-<main>
-  <div class="mark">
-    <i style="background:var(--gold)"></i>
-    <i style="background:var(--pink)"></i>
-    <i style="background:var(--blue)"></i>
-    <i style="background:var(--green)"></i>
-  </div>
-
-  <p class="eyebrow">NEON POP</p>
-  <h1>Legal</h1>
-  <p class="lede">
-    The documents below govern your use of NEON POP. They are also linked from
-    inside the game, under Settings.
-  </p>
-
-  <div class="docs">
-    <a class="doc" href="privacy.html">
-      <svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 3l7 3v5c0 4.4-2.9 8.4-7 9.7C7.9 19.4 5 15.4 5 11V6l7-3z"/>
-        <path d="M9.2 12l2 2 3.6-3.8"/>
-      </svg>
-      <span class="doc-body">
-        <span class="doc-title">Privacy Policy</span>
-        <span class="doc-note">What is collected, why, and how to reach us</span>
-      </span>
-      <svg class="doc-go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M9 5l7 7-7 7"/>
-      </svg>
+<nav class="nav">
+  <div class="nav-in">
+    <a class="nav-mark" href="./">
+      <img src="assets/icon-180.png" alt="">
+      <span class="nav-name">NEON POP</span>
     </a>
-
-    <a class="doc" href="terms.html">
-      <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5z"/>
-        <path d="M14 3v5h5"/><path d="M9 13h6"/><path d="M9 17h4"/>
-      </svg>
-      <span class="doc-body">
-        <span class="doc-title">Terms of Service</span>
-        <span class="doc-note">The rules for playing and using the game</span>
-      </span>
-      <svg class="doc-go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M9 5l7 7-7 7"/>
-      </svg>
-    </a>
+    <div class="nav-links">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </div>
   </div>
-</main>
+</nav>
+
+<section class="doc">
+  <div class="measure">
+    <h1>Legal</h1>
+    <p class="lede" style="margin-bottom:0">
+      The two documents that cover NEON POP. Both are also linked from inside
+      the game, under Settings.
+    </p>
+
+    <div class="index-list">
+      <a class="entry" href="privacy.html">
+        <span class="entry-n">01</span>
+        <span class="entry-b">
+          <h3>Privacy Policy</h3>
+          <p>What the game collects, why, how long it is kept, and how to have it deleted.</p>
+        </span>
+        <span class="entry-go">&rsaquo;</span>
+      </a>
+
+      <a class="entry" href="terms.html">
+        <span class="entry-n">02</span>
+        <span class="entry-b">
+          <h3>Terms of Service</h3>
+          <p>The licence to play, the rules for display names and leaderboards, and the limits of our liability.</p>
+        </span>
+        <span class="entry-go">&rsaquo;</span>
+      </a>
+    </div>
+  </div>
+</section>
 
 <footer>
-  <a href="https://wish-go.github.io/neon-pop/">Official site</a>
-  <span class="sep">·</span>
-  <a href="mailto:aslm2l1k123@gmail.com">aslm2l1k123@gmail.com</a>
+  <div class="measure">
+    <span>NEON POP</span>
+    <a href="mailto:aslm2l1k123@gmail.com">aslm2l1k123@gmail.com</a>
+    <a class="spacer" href="https://wish-go.github.io/neon-pop/">Official site</a>
+  </div>
 </footer>
 
 </body>
