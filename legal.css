@@ -94,21 +94,27 @@ footer .spacer { margin-left: auto; }
 /* ── legal documents ────────────────────────────────── */
 
 .doc { padding-top: clamp(56px, 8vw, 88px); }
-.doc h1 { font-size: clamp(36px, 5.6vw, 56px); margin-bottom: 14px; }
+.doc h1 { font-size: clamp(36px, 5.6vw, 56px); margin-bottom: 20px; }
 .doc .stamp {
   color: var(--grey); font-size: 15px;
-  padding-bottom: 30px; margin-bottom: 42px;
+  padding-bottom: 34px; margin-bottom: 50px;
   border-bottom: 1px solid var(--line);
 }
 .doc h2 {
-  font-size: 25px; letter-spacing: -0.018em;
-  margin: 52px 0 14px; scroll-margin-top: 72px;
+  font-size: 29px; letter-spacing: -0.02em;
+  margin: 68px 0 18px; scroll-margin-top: 76px;
 }
-.doc h2:first-of-type { margin-top: 0; }
+
+/* 二级小节(2.1 / 2.2)之前没有任何上边距,直接顶在上一段屁股上 */
+.doc h3 {
+  font-size: 21px; letter-spacing: -0.015em;
+  margin: 40px 0 12px; scroll-margin-top: 76px;
+}
+.doc h2 + h3 { margin-top: 26px; }
 .doc p, .doc li { color: #c7c7cc; font-size: 17px; line-height: 1.65; }
-.doc p + p { margin-top: 15px; }
-.doc ul { margin: 15px 0 0; padding-left: 21px; }
-.doc li { margin-bottom: 9px; }
+.doc p + p { margin-top: 17px; }
+.doc ul { margin: 18px 0 0; padding-left: 22px; }
+.doc li { margin-bottom: 12px; }
 .doc li::marker { color: var(--grey); }
 .doc strong { color: var(--ink); font-weight: 600; }
 
@@ -129,12 +135,12 @@ footer .spacer { margin-left: auto; }
 .callout {
   background: rgba(41, 151, 255, 0.09);
   border: 1px solid rgba(41, 151, 255, 0.22);
-  border-radius: 14px; padding: 20px 22px; margin: 24px 0 0;
+  border-radius: 16px; padding: 26px 28px; margin: 34px 0 8px;
 }
 .callout p { color: var(--ink); font-size: 16px; }
 
 .contact {
-  margin-top: 56px; padding-top: 30px;
+  margin-top: 72px; padding-top: 34px;
   border-top: 1px solid var(--line);
 }
 
@@ -186,12 +192,12 @@ footer .measure { display: flex; flex-wrap: wrap; gap: 12px 26px; align-items: c
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  margin-top: 26px;
   font-size: 15px;
 }
 th, td {
   text-align: left;
-  padding: 13px 14px;
+  padding: 16px 16px;
   border-bottom: 1px solid var(--line);
   vertical-align: top;
   color: #c7c7cc;
