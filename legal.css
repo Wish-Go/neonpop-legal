@@ -2,7 +2,7 @@
   --black: #000;
   --panel: #0a0a0d;
   --ink: #f5f5f7;
-  --ink-2: var(--ink-2);   /* 正文灰,介于 ink 与 grey 之间 */
+  --ink-2: #d2d2d7;        /* 正文灰,介于 --ink 与 --grey 之间。曾误写成 var(--ink-2) 自我引用 → 变量无效、正文回退到继承色 */
   --grey: #86868b;
   --line: rgba(255, 255, 255, 0.1);
   --link: #2997ff;
@@ -55,7 +55,13 @@ a:hover { text-decoration: underline; }
   letter-spacing: -0.005em;
 }
 .nav-links { margin-left: auto; display: flex; gap: 22px; }
-.nav-links a { font-size: 12px; color: var(--grey); }
+.nav-links a {
+  font-size: 12px; color: var(--grey);
+  /* 撑满 48px 高的顶栏:内 padding 扩命中盒、等量负 margin 抵消对布局的影响。
+     文字只有 12px,不扩的话可点区域远低于移动端 44px 的下限 */
+  padding: 15px 4px;
+  margin: -15px -4px;
+}
 .nav-links a:hover { color: var(--ink); text-decoration: none; }
 
 /* ── sections ───────────────────────────────────────── */
@@ -63,6 +69,13 @@ a:hover { text-decoration: underline; }
 section { padding: clamp(72px, 11vw, 132px) 22px; }
 .shell { max-width: var(--shell); margin: 0 auto; }
 .measure { max-width: var(--measure); margin: 0 auto; }
+
+/* 堆叠形态下收窄行宽:692px 配 17px 正文约 84 字符/行,超过 75 就开始难读。
+   页脚必须跟着收,否则右基准线差一截 */
+@media (min-width: 700px) and (max-width: 939.98px) {
+  .doc .measure,
+  footer .measure { max-width: 620px; }
+}
 .panel { background: var(--panel); }
 .center { text-align: center; }
 
@@ -166,7 +179,8 @@ code {
 footer .measure { display: flex; flex-wrap: wrap; gap: 12px 26px; align-items: center; }
 
 /* 正文在 >=1060px 拉宽到 976,页脚不跟就会右边界错开一大截 */
-@media (min-width: 1060px) {
+/* 与下面侧栏栅格的断点必须同步:不同步的话中间区间正文 976 宽、页脚还是 692,右基准线差 142 */
+@media (min-width: 940px) {
   .doc.with-toc ~ footer .measure,
   footer .measure { max-width: 976px; }
 }
@@ -175,7 +189,7 @@ footer .measure { display: flex; flex-wrap: wrap; gap: 12px 26px; align-items: c
 /* 侧栏只在「确实有目录」的页面上开(section 带 .with-toc)。
    之前这条挂在 .doc .measure 上,索引页没目录也吃到了栅格,
    三个子元素被自动塞进两列 —— 标题在左、正文在右、卡片又回左。 */
-@media (min-width: 1060px) {
+@media (min-width: 940px) {
   .doc.with-toc .measure {
     max-width: 976px;
     display: grid;
