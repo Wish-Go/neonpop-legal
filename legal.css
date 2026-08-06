@@ -51,6 +51,7 @@ a:hover { text-decoration: underline; }
 .nav-mark { display: flex; align-items: center; gap: 9px; }
 .nav-mark img { width: 20px; height: 20px; border-radius: 5px; }
 .nav-name {
+  text-transform: uppercase;   /* 字标外观全大写;标记里存真名 Neon Pop */
   font-size: 14px; font-weight: 600; color: var(--ink);
   letter-spacing: -0.005em;
 }
@@ -251,3 +252,6 @@ td a { overflow-wrap: anywhere; }
   }
   td:first-child { color: var(--ink); font-weight: 600; }
 }
+
+/* 页脚字标:外观全大写,标记里是产品名 Neon Pop */
+footer .measure > span { text-transform: uppercase; }
