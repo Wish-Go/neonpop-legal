@@ -2,7 +2,7 @@
   --black: #000;
   --panel: #0a0a0d;
   --ink: #f5f5f7;
-  --ink-2: #d2d2d7;        /* 正文灰,介于 --ink 与 --grey 之间。曾误写成 var(--ink-2) 自我引用 → 变量无效、正文回退到继承色 */
+  --ink-2: #d2d2d7; 
   --grey: #86868b;
   --line: rgba(255, 255, 255, 0.1);
   --link: #2997ff;
@@ -51,15 +51,13 @@ a:hover { text-decoration: underline; }
 .nav-mark { display: flex; align-items: center; gap: 9px; }
 .nav-mark img { width: 20px; height: 20px; border-radius: 5px; }
 .nav-name {
-  text-transform: uppercase;   /* 字标外观全大写;标记里存真名 Neon Pop */
+  text-transform: uppercase;  
   font-size: 14px; font-weight: 600; color: var(--ink);
   letter-spacing: -0.005em;
 }
 .nav-links { margin-left: auto; display: flex; gap: 22px; }
 .nav-links a {
   font-size: 12px; color: var(--grey);
-  /* 撑满 48px 高的顶栏:内 padding 扩命中盒、等量负 margin 抵消对布局的影响。
-     文字只有 12px,不扩的话可点区域远低于移动端 44px 的下限 */
   padding: 15px 4px;
   margin: -15px -4px;
 }
@@ -70,9 +68,6 @@ a:hover { text-decoration: underline; }
 section { padding: clamp(72px, 11vw, 132px) 22px; }
 .shell { max-width: var(--shell); margin: 0 auto; }
 .measure { max-width: var(--measure); margin: 0 auto; }
-
-/* 堆叠形态下收窄行宽:692px 配 17px 正文约 84 字符/行,超过 75 就开始难读。
-   页脚必须跟着收,否则右基准线差一截 */
 @media (min-width: 700px) and (max-width: 939.98px) {
   .doc .measure,
   footer .measure { max-width: 620px; }
@@ -121,7 +116,6 @@ footer .spacer { margin-left: auto; }
   margin: 68px 0 18px; scroll-margin-top: 76px;
 }
 
-/* 二级小节(2.1 / 2.2)之前没有任何上边距,直接顶在上一段屁股上 */
 .doc h3 {
   font-size: 21px; letter-spacing: -0.015em;
   margin: 40px 0 12px; scroll-margin-top: 76px;
@@ -179,17 +173,11 @@ code {
 
 footer .measure { display: flex; flex-wrap: wrap; gap: 12px 26px; align-items: center; }
 
-/* 正文在 >=1060px 拉宽到 976,页脚不跟就会右边界错开一大截 */
-/* 与下面侧栏栅格的断点必须同步:不同步的话中间区间正文 976 宽、页脚还是 692,右基准线差 142 */
 @media (min-width: 940px) {
   .doc.with-toc ~ footer .measure,
   footer .measure { max-width: 976px; }
 }
 
-
-/* 侧栏只在「确实有目录」的页面上开(section 带 .with-toc)。
-   之前这条挂在 .doc .measure 上,索引页没目录也吃到了栅格,
-   三个子元素被自动塞进两列 —— 标题在左、正文在右、卡片又回左。 */
 @media (min-width: 940px) {
   .doc.with-toc .measure {
     max-width: 976px;
@@ -237,13 +225,10 @@ td a { overflow-wrap: anywhere; }
 
 @media (max-width: 620px) {
   table, tbody, tr, td { display: block; }
-  /* 整行隐藏而不是只隐藏 th:只隐藏单元格的话,表头那个 tr 仍占位,
-     顶着 padding 和分隔线留下一条空带 */
   thead, tr:first-child:has(th) { display: none; }
   th { display: none; }
   tr { border-bottom: 1px solid var(--line); padding: 14px 0; }
   td { border: 0; padding: 5px 0 5px 0; }
-  /* 表头隐藏后列名必须由单元格自己带出来,否则读不出哪格是哪列 */
   td[data-label]::before {
     content: attr(data-label);
     display: block;
@@ -252,6 +237,4 @@ td a { overflow-wrap: anywhere; }
   }
   td:first-child { color: var(--ink); font-weight: 600; }
 }
-
-/* 页脚字标:外观全大写,标记里是产品名 Neon Pop */
 footer .measure > span { text-transform: uppercase; }
