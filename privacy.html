@@ -49,14 +49,16 @@
     <div class="doc-body">
 
     <h1>Privacy Policy</h1>
-    <p class="stamp">Neon Pop · Last updated: 7 August 2026 · Effective: 7 August 2026</p>
+    <p class="stamp">Neon Pop · Last updated: 1 October 2026 · Effective: 1 October 2026</p>
 
     <p>This Privacy Policy explains what information the mobile game <strong>Neon Pop</strong> ("the Game", "we", "us")
     collects, why we collect it, and the choices you have. It applies to the Game distributed under the application ID
     <code>com.paynetim.neonpop</code>.</p>
 
     <div class="callout"><p><strong>Short version.</strong> We do not ask for your name, email address, phone number or any account sign-up to play.
-    We do not sell your data and we do not show advertising. The Game uses analytics and crash-reporting tools.</p></div>
+    We do not sell your data for money. The Game shows rewarded video ads, and only when you choose to watch one in
+    exchange for an in-game benefit. The Game uses analytics and crash-reporting tools and an advertising service
+    (Google AdMob).</p></div>
 
     <h2 id="who-is-responsible">1. Who is responsible</h2>
     <p>The Game is developed and published by the Neon Pop development team ("the Developer"). If you have any question
@@ -72,7 +74,7 @@
           switches, and the sound and music volume levels.</li>
       <li>Your progress &mdash; your personal best score for each mode and difficulty, your item stock and
           which items you have unlocked, and whether you have seen the tutorial.</li>
-      <li>Your chosen display name. It stays on this device and is not shown to any other player. The only way it leaves your device is if you choose to send us a message with the in-game <em>Feedback</em> button (see 2.3).</li>
+      <li>Your chosen display name. It stays on this device and is not shown to any other player. The only way it leaves your device is if you choose to send us a message with the in-game <em>Feedback</em> button (see 2.4).</li>
     </ul>
 
     <h3>2.2 Collected automatically for analytics and stability</h3>
@@ -98,16 +100,48 @@
     </table>
     <p>Firebase assigns a resettable, pseudonymous app-instance identifier. We do not use it to identify you personally,
     and we do not combine it with your real-world identity.</p>
+    <p>The Game also signs you in anonymously with Google Firebase Authentication so that your play can be recognised
+    as the same player across sessions. This creates a random account identifier. It is not linked to your name, email
+    address or phone number. If you are signed in to Google Play Games on your device, the Game may link that anonymous
+    identifier to your Play Games player ID.</p>
 
-    <h3>2.3 Information you send us voluntarily</h3>
+    <h3>2.3 Collected when ads are requested or shown</h3>
+    <p>The Game includes the Google Mobile Ads SDK (Google AdMob) to show rewarded video ads. An ad plays only after you
+    tap a button that offers a reward for watching it. When the Game requests or shows an ad, Google and its advertising
+    partners may collect:</p>
+    <table>
+      <tr><th>Category</th><th>Examples</th><th>Purpose</th></tr>
+      <tr>
+        <td data-label="Category">Identifiers</td>
+        <td data-label="Examples">Android advertising ID, app-instance identifier, IP address</td>
+        <td data-label="Purpose">Deliver ads, limit how often you see the same ad, prevent fraud</td>
+      </tr>
+      <tr>
+        <td data-label="Category">Approximate location</td>
+        <td data-label="Examples">Country or region derived from your IP address. We do not collect GPS or precise location.</td>
+        <td data-label="Purpose">Show ads that are available in your region</td>
+      </tr>
+      <tr>
+        <td data-label="Category">Ad interactions and diagnostics</td>
+        <td data-label="Examples">Which ad was shown, whether it was watched to the end or tapped, SDK performance data</td>
+        <td data-label="Purpose">Measure ad delivery, grant your reward, keep the ad service working</td>
+      </tr>
+    </table>
+    <p>Depending on your region and your choices, ads may be personalised using these identifiers. You can turn
+    personalisation off at any time (see section 8). How Google uses this information is described at
+    <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">policies.google.com/technologies/partner-sites</a>.</p>
+    <p>We also record, for our own analytics, that an ad was shown, where in the Game you chose to watch it, and the
+    estimated revenue it produced. This record uses the same pseudonymous identifiers described in 2.2.</p>
+
+    <h3>2.4 Information you send us voluntarily</h3>
     <p>If you use the in-game <em>Feedback</em> button, your email app opens with a pre-filled message containing your
     player ID, display name, region code, Game version and platform. You can edit or delete any part of that
     message before sending &mdash; nothing is sent until you send it. We use what you send only to answer you.</p>
 
     <h2 id="what-we-do-not-do">3. What we do not do</h2>
     <ul>
-      <li>We do not display advertising and we do not include any advertising SDK.</li>
-      <li>We do not sell or rent your personal information, and we do not share it for cross-context behavioural advertising.</li>
+      <li>We do not show ads you did not ask for. Every ad in the Game is a rewarded video that you start yourself.</li>
+      <li>We do not sell or rent your personal information for money.</li>
       <li>We do not collect your contacts, photos, microphone input, or precise location.</li>
       <li>We do not require an account, an email address, or a phone number.</li>
     </ul>
@@ -117,8 +151,10 @@
       <li><strong>Performance of a contract</strong> — operating the Game.</li>
       <li><strong>Legitimate interests</strong> — keeping the Game stable and secure, and
           understanding aggregate usage.</li>
-      <li><strong>Consent</strong> — the Game does not show a consent prompt; analytics and crash
-          reporting start when the Game launches. The controls you do have are listed in section 8.</li>
+      <li><strong>Consent</strong> — where the law of your region requires consent for advertising, the Game
+          shows Google's consent prompt before any ad is requested, and no ad is requested until you have
+          made a choice. Analytics and crash reporting start when the Game launches. The controls you have
+          are listed in section 8.</li>
     </ul>
 
     <h2 id="service-providers">5. Service providers</h2>
@@ -130,6 +166,16 @@
         <td data-label="Provider">Google (Firebase Analytics, Crashlytics)</td>
         <td data-label="Used for">Usage analytics, crash reporting</td>
         <td data-label="Their privacy policy"><a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">firebase.google.com/support/privacy</a></td>
+      </tr>
+      <tr>
+        <td data-label="Provider">Google (Firebase Authentication, Google Play Games Services)</td>
+        <td data-label="Used for">Anonymous sign-in, optional link to your Play Games player ID</td>
+        <td data-label="Their privacy policy"><a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">firebase.google.com/support/privacy</a></td>
+      </tr>
+      <tr>
+        <td data-label="Provider">Google (AdMob, User Messaging Platform)</td>
+        <td data-label="Used for">Rewarded video ads, advertising consent prompt</td>
+        <td data-label="Their privacy policy"><a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">policies.google.com/technologies/partner-sites</a></td>
       </tr>
       <tr>
         <td data-label="Provider">Google Play</td>
@@ -151,6 +197,7 @@
       <li><strong>Analytics data</strong> — retained by Firebase according to the retention period configured in the
           Firebase console, after which it is deleted or aggregated.</li>
       <li><strong>Crash reports</strong> — retained for up to 90 days by Crashlytics.</li>
+      <li><strong>Advertising data</strong> — retained by Google according to its own retention policies.</li>
     </ul>
 
     <h2 id="your-rights-and-choices">8. Your rights and choices</h2>
@@ -161,6 +208,10 @@
           within the period required by applicable law (30 days in most jurisdictions).</li>
       <li><strong>Opt out of analytics</strong> — you can limit ad and analytics identifiers in your device settings
           (Android: Settings → Privacy → Ads). Deleting the Game stops all collection.</li>
+      <li><strong>Advertising choices</strong> — watching an ad is always optional; if you never tap a reward
+          button, no ad is shown. You can reset or delete your advertising ID, or turn off ad personalisation,
+          in your device settings (Android: Settings → Privacy → Ads) or at
+          <a href="https://adssettings.google.com" target="_blank" rel="noopener">adssettings.google.com</a>.</li>
       <li><strong>Complain to a regulator</strong> — if you are in the EEA or the UK you may lodge a complaint with your
           local supervisory authority.</li>
     </ul>
